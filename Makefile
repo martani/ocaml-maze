@@ -1,15 +1,14 @@
-EXEC    := mazes
+EXECS   := square bee
 OPTIONS := -thread
 CMAS    := graphics.cma unix.cma threads.cma
 
-main:
-	ocamlc $(OPTIONS) $(CMAS) square.ml -o $(EXEC)
+all:$(EXECS)
 
-bee:
-	ocamlc $(OPTIONS) $(CMAS) bee.ml -o $(EXEC)
+square:square.ml
+	ocamlc $(OPTIONS) $(CMAS) square.ml -o square
+
+bee:bee.ml
+	ocamlc $(OPTIONS) $(CMAS) bee.ml -o bee
 
 clean:
-	rm *.cmi *.cmo $(EXEC)
-
-
-
+	rm -f *.cmi *.cmo $(EXECS)
