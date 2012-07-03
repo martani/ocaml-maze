@@ -264,7 +264,11 @@ let solve laby public_x public_y ex ey =
                     laby.cells.(x).(y).color <- 6724044 ;
                     color_cell laby x y;
                     draw_cell laby x y;
-                    Thread.delay 0.02;
+                    (try
+		      Thread.delay 0.02;
+		    with
+		      _ -> ());
+		      
                     false
                     )
                 else
@@ -288,7 +292,10 @@ let solve laby public_x public_y ex ey =
                                     
                                 color_cell laby x y;
                                 draw_cell laby x y;
-                                Thread.delay 0.02;
+                                (try
+				  Thread.delay 0.02;
+				 with
+				  _ -> ());
                             with
                                 No_Cell x -> ()
                         ) allowed_doors;

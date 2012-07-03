@@ -211,7 +211,14 @@ let solve laby public_x public_y ex ey =
                     laby.cells.(x).(y).color <- 6724044 ;
                     color_cell laby x y;
                     draw_cell laby x y;
-                    Thread.delay 0.008;
+		    
+		    (* avoid Thread.delay exception: Fatal error: exception Unix.Unix_error(2, "select", "") *)
+                    (try
+			Thread.delay 0.008
+		    with
+			_ -> ()
+		    );
+			
                     false
                     )
                 else
@@ -235,7 +242,13 @@ let solve laby public_x public_y ex ey =
                                     
                                 color_cell laby x y;
                                 draw_cell laby x y;
-                                Thread.delay 0.008;
+                                
+                                (* avoid Thread.delay exception: Fatal error: exception Unix.Unix_error(2, "select", "") *)
+                                try
+				  Thread.delay 0.008
+				with
+				  _ -> ()
+				 
                             with
                                 No_Cell x -> ()
                         ) allowed_doors;
